@@ -74,11 +74,11 @@ def summarize_points(submissions: [dict]):
         if submission["score"] in submissions:
             submissions_score = submission["score"] + submissions_score
         points_possible_so_far = points_possible * (submission["assignment"]["group"]["group_weight"])
-        points_obtained = submissions_score * submission["assignment"]["group"]["group_weight"]
+        points_obtained = submissions_score * (submission["assignment"]["group"]["group_weight"])
         current_grade = round(100 * (points_obtained/points_possible_so_far))
-    print("Points possible so far: " + points_possible_so_far)
-    print("Points obtained: " + points_obtained)
-    print("Current grade: " + current_grade)
+    print("Points possible so far: " + str(points_possible_so_far))
+    print("Points obtained: " + str(points_obtained))
+    print("Current grade: " + str(current_grade))
 
 
 # summarize_groups
