@@ -14,6 +14,7 @@ Refer to the instructions on Canvas for more information.
 author: SWETHA SANKAR
 """
 import canvas_requests
+import matplotlib.pyplot as plt
 
 __version__ = 7
 
@@ -24,6 +25,8 @@ def main(user_id:str):
     courses = filter_available_courses(canvas_requests.get_courses(user_id))
     print_courses(courses)
     summarize_points(canvas_requests.get_submissions(user_id, choose_course((get_course_ids(courses)))))
+    summarize_groups(canvas_requests.get_submissions(user_id, choose_course(get_course_ids(courses))))
+    plot_scores(canvas_requests.get_submissions(user_id, choose_course((get_course_ids(courses)))))
 
 
 # 2) print_user_info
@@ -70,8 +73,9 @@ def summarize_points(submissions: [dict]):
     submissions_score = 0
     points_possible = 0
     for submission in submissions:
-        points_possible = submission["assignment"]["points_possible"] + points_possible
-        if submission["score"] in submissions:
+        if submission["assignment"]["points_possible"] is not None:
+            points_possible = submission["assignment"]["points_possible"] + points_possible
+        if submission["score"] is not None:
             submissions_score = submission["score"] + submissions_score
         points_possible_so_far = points_possible * (submission["assignment"]["group"]["group_weight"])
         points_obtained = submissions_score * (submission["assignment"]["group"]["group_weight"])
@@ -82,8 +86,34 @@ def summarize_points(submissions: [dict]):
 
 
 # summarize_groups
+def summarize_groups(submissions: [dict]):
+    print("* Class Activities : ")
+    print("* Discussion Forums : ")
+    print("* Learning Quizzes : ")
+    print("* Programming Problems : ")
+
+
 # 9) plot_scores
+def plot_scores(submissions: [dict]):
+    for submission in submissions:
+        if submission["score"] and submission["assignment"]["points_possible"] is not None:
+            grade = (submission["score"]*100)/submission["assignment"]["points_possible"]
+        plt.hist(grade)
+    plt.title("Distribution of Grades")
+    plt.xlabel("Grades")
+    plt.ylabel("Number of Assignments")
+    plt.show()
+
+
 # 10) plot_grade_trends
+def plot_grade_trends(submissions:[dict]):
+    running_high_sum = 0
+    running_high_sums = []
+    running_low_sum = 0
+    running_low_sums = []
+    for submission in submissions:
+        for item in submission:
+            pass
 
 
 # Keep any function tests inside this IF statement to ensure
