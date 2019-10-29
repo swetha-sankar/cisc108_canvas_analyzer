@@ -73,13 +73,12 @@ def summarize_points(submissions: [dict]):
     submissions_score = 0
     points_possible = 0
     for submission in submissions:
-        if submission["assignment"]["points_possible"] is not None:
-            points_possible = submission["assignment"]["points_possible"] + points_possible
         if submission["score"] is not None:
             submissions_score = submission["score"] + submissions_score
+            points_possible = submission["assignment"]["points_possible"] + points_possible
+            points_obtained = submissions_score * (submission["assignment"]["group"]["group_weight"])
         points_possible_so_far = points_possible * (submission["assignment"]["group"]["group_weight"])
-        points_obtained = submissions_score * (submission["assignment"]["group"]["group_weight"])
-        current_grade = round(100 * (points_obtained/points_possible_so_far))
+        current_grade = round(100 * (points_obtained / points_possible_so_far))
     print("Points possible so far: " + str(points_possible_so_far))
     print("Points obtained: " + str(points_obtained))
     print("Current grade: " + str(current_grade))
