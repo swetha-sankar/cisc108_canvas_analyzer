@@ -150,12 +150,12 @@ def summarize_groups(submissions: [dict]):
             groups[submission["assignment"]["group"]["name"]] += 1
         else:
             groups[submission["assignment"]["group"]["name"]] = 1
-    for key, value in groups.items():
+    for key, value in sorted(groups.items()):
         for submission in submissions:
             if key == submission["assignment"]["group"]["name"] and submission["score"] is not None:
                 score = submission["score"] + score
                 points_possible = submission["assignment"]["points_possible"] + points_possible
-        grade = round((score*value)/(points_possible*value)*100)
+        grade = round((score/points_possible)*100)
         print("*", key, ":", grade)
 
 
