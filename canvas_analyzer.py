@@ -30,10 +30,11 @@ def main(user_id: str):
     print_user_info(canvas_requests.get_user(user_id))
     courses = filter_available_courses(canvas_requests.get_courses(user_id))
     print_courses(courses)
-    summarize_points(canvas_requests.get_submissions(user_id, choose_course((get_course_ids(courses)))))
-    summarize_groups(canvas_requests.get_submissions(user_id, choose_course(get_course_ids(courses))))
-    plot_scores(canvas_requests.get_submissions(user_id, choose_course((get_course_ids(courses)))))
-    plot_grade_trends(canvas_requests.get_submissions(user_id, choose_course((get_course_ids(courses)))))
+    chosen = choose_course(get_course_ids(courses))
+    summarize_points(canvas_requests.get_submissions(user_id, chosen))
+    summarize_groups(canvas_requests.get_submissions(user_id, chosen))
+    plot_scores(canvas_requests.get_submissions(user_id, chosen))
+    plot_grade_trends(canvas_requests.get_submissions(user_id, chosen))
 
 
 # 2) print_user_info
