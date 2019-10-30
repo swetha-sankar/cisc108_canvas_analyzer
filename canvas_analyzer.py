@@ -143,20 +143,18 @@ def summarize_groups(submissions: [dict]):
         submissions ([dict]): List of submission dictionaries from canvas_requests.get_submissions
     '''
     groups = {}
-    points_possible = 0
-    score = 0
+    points_possible = {}
     for submission in submissions:
-        if submission["assignment"]["group"]["name"] in groups and submission["score"] is not None:
-            groups[submission["assignment"]["group"]["name"]] += 1
-        else:
-            groups[submission["assignment"]["group"]["name"]] = 1
-    for key, value in sorted(groups.items()):
-        for submission in submissions:
-            if key == submission["assignment"]["group"]["name"] and submission["score"] is not None:
-                score = submission["score"] + score
-                points_possible = submission["assignment"]["points_possible"] + points_possible
-        grade = round((score/points_possible)*100)
-        print("*", key, ":", grade)
+        if submission["score"] is not None:
+            name = submission["assignment"]["group"]["name"]
+            if name not in groups:
+                groups[name] = 0
+                points_possible[name] = 0
+            groups[name] = groups[name] + submission["score"]
+            points_possible[name] = submission["assignment"]["points_possible"] + points_possible[name]
+    for name in groups:
+        key, value = groups[name], points_possible[name]
+        print("*", name, ":", round(100*(key/value)))
 
 
 # 9) plot_scores
