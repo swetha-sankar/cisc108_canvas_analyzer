@@ -23,10 +23,9 @@ __version__ = 7
 # 1) main
 def main(user_id: str):
     '''
-    This main function identifies the flow of data
+    This function  a string representing the user token and calls all the other functions.
     :Args:
-        user_id (str):
-    :return:
+        user_id (str): User token
     '''
     print_user_info(canvas_requests.get_user(user_id))
     courses = filter_available_courses(canvas_requests.get_courses(user_id))
@@ -42,7 +41,7 @@ def print_user_info(user_id: dict):
     '''
     This function prints the user's name, title, primary email, and bio.
     :Args:
-        user_id (dict):
+        user_id (dict): User dictionary
     '''
     print("Name: " + user_id["name"])
     print("Title: " + user_id["title"])
