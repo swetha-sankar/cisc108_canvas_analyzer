@@ -23,7 +23,7 @@ __version__ = 7
 # 1) main
 def main(user_id: str):
     '''
-    This function  a string representing the user token and calls all the other functions.
+    This function consumes a string representing the user token and calls all of the other functions.
     :Args:
         user_id (str): User token
     '''
@@ -53,7 +53,7 @@ def print_user_info(user_id: dict):
 # 3) filter_available_courses
 def filter_available_courses(courses: [dict]) -> [dict]:
     '''
-    This function consumes a list of Course dictionaries and returns a list of Course dictionaries where the
+    This function consumes a list of course dictionaries and returns a list of course dictionaries where the
     workflow_state key's value is 'available'
     :Args:
         courses ([dict]): List of all course dictionaries
@@ -178,7 +178,7 @@ def plot_scores(submissions: [dict]):
 
 
 # 10) plot_grade_trends
-def plot_grade_trends(submissions:[dict]):
+def plot_grade_trends(submissions: [dict]):
     '''
     This function consumes a list of Submission dictionaries and plots the grade trend of the submissions as a line plot
     It plots the running sum of graded submission scores followed by the running sum of points still possible from
@@ -232,12 +232,11 @@ def plot_grade_trends(submissions:[dict]):
     plt.ylabel("Grade")
     plt.show()
 
+
 # Keep any function tests inside this IF statement to ensure
 # that your `test_my_solution.py` does not execute it.
+# main('25~t8y3fQkkX86KigbVz83gCo1U5mVgodUBNwJo4TSSkritxzKsfATqcs6SH2ceHuMd')
 if __name__ == "__main__":
     main('hermione')
-    # main('ron')
-    # main('harry')
-    
-    # https://community.canvaslms.com/docs/DOC-10806-4214724194
-    # main('YOUR OWN CANVAS TOKEN (You know, if you want)')
+    main('ron')
+    main('harry')
